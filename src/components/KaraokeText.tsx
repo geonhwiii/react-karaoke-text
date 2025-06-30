@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export interface KaraokeTextProps {
   /** 표시할 텍스트 */
@@ -49,9 +50,9 @@ export const KaraokeText: React.FC<KaraokeTextProps> = ({
     const animate = () => {
       const elapsed = Date.now() - startTime
       const ratio = Math.min(elapsed / duration, 1)
-      
+
       // easeOutCubic 함수 적용
-      const easedRatio = 1 - Math.pow(1 - ratio, 3)
+      const easedRatio = 1 - (1 - ratio) ** 3
       const newProgress = startProgress + progressDiff * easedRatio
 
       setCurrentProgress(newProgress)
@@ -91,21 +92,11 @@ export const KaraokeText: React.FC<KaraokeTextProps> = ({
   }
 
   return (
-    <div 
-      ref={textRef}
-      className={`karaoke-text ${className}`}
-      style={containerStyle}
-    >
-      <span className="karaoke-text__base">
-        {text}
-      </span>
-      <span 
-        className="karaoke-text__active"
-        style={activeStyle}
-        aria-hidden="true"
-      >
+    <div ref={textRef} className={`karaoke-text ${className}`} style={containerStyle}>
+      <span className="karaoke-text__base">{text}</span>
+      <span className="karaoke-text__active" style={activeStyle} aria-hidden="true">
         {text}
       </span>
     </div>
   )
-} 
+}

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 import { KaraokeText } from './components/KaraokeText'
 import './App.css'
 
 const sampleTexts = [
-  "안녕하세요, React Karaoke Text입니다",
-  "Apple Music 스타일의 노래 자막 효과",
-  "왼쪽부터 오른쪽으로 자연스러운 그라데이션",
-  "Beautiful gradient animation for lyrics"
+  '안녕하세요, React Karaoke Text입니다',
+  'Apple Music 스타일의 노래 자막 효과',
+  '왼쪽부터 오른쪽으로 자연스러운 그라데이션',
+  'Beautiful gradient animation for lyrics',
 ]
 
 function App() {
@@ -20,11 +21,11 @@ function App() {
 
     if (isPlaying) {
       interval = setInterval(() => {
-        setProgress(prev => {
+        setProgress((prev) => {
           if (prev >= 100) {
             // 다음 텍스트로 이동
-            setCurrentTextIndex(prevIndex => 
-              prevIndex >= sampleTexts.length - 1 ? 0 : prevIndex + 1
+            setCurrentTextIndex((prevIndex) =>
+              prevIndex >= sampleTexts.length - 1 ? 0 : prevIndex + 1,
             )
             return 0
           }
@@ -112,10 +113,10 @@ function App() {
           </div>
 
           <div className="button-group">
-            <button onClick={handlePlay} className="btn primary">
+            <button type="button" onClick={handlePlay} className="btn primary">
               {isPlaying ? '일시정지' : '재생'}
             </button>
-            <button onClick={handleReset} className="btn secondary">
+            <button type="button" onClick={handleReset} className="btn secondary">
               초기화
             </button>
           </div>
@@ -126,7 +127,8 @@ function App() {
           <div className="text-buttons">
             {sampleTexts.map((text, index) => (
               <button
-                key={index}
+                key={text}
+                type="button"
                 onClick={() => handleTextChange(index)}
                 className={`btn text-btn ${index === currentTextIndex ? 'active' : ''}`}
               >
@@ -139,13 +141,10 @@ function App() {
 
       <div className="examples">
         <h2>다양한 스타일 예시</h2>
-        
+
         <div className="example">
           <h3>기본 스타일</h3>
-          <KaraokeText
-            text="기본 스타일의 카라오케 텍스트"
-            progress={progress * 0.8}
-          />
+          <KaraokeText text="기본 스타일의 카라오케 텍스트" progress={progress * 0.8} />
         </div>
 
         <div className="example">
