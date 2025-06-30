@@ -1,24 +1,79 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* 2025 Apple Music Style - 네모의 꿈 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-@keyframes logo-spin {
+.app {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 배경 애니메이션 */
+.app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 음악 헤더 */
+.music-header {
+  display: flex;
+  align-items: center;
+  padding: 60px 40px 40px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
+}
+
+.album-art {
+  margin-right: 32px;
+}
+
+.vinyl-record {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+  border-radius: 50%;
+  position: relative;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 2px 8px rgba(255, 255, 255, 0.1);
+  animation: spin 20s linear infinite;
+}
+
+.vinyl-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background: #333;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
@@ -27,270 +82,396 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.song-info {
+  flex: 1;
 }
 
-.card {
-  padding: 2em;
+.song-title {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
-.read-the-docs {
-  color: #888;
+.artist-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
 }
 
-.app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-  line-height: 1.6;
+.album-name {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
 }
 
-.header {
+/* 메인 카라오케 섹션 */
+.karaoke-main {
+  padding: 0 40px 60px;
   text-align: center;
-  margin-bottom: 3rem;
 }
 
-.header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
+.lyrics-container {
+  margin-bottom: 60px;
 }
 
-.header p {
-  font-size: 1.2rem;
-  color: #666;
-  margin: 0;
-}
-
-.demo-section {
-  background: #f8f9fa;
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 3rem;
-}
-
-.karaoke-container {
-  background: white;
-  border-radius: 12px;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  min-height: 120px;
+.current-line {
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.controls {
-  display: grid;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.control-group {
+.upcoming-lines {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 12px;
+  align-items: center;
 }
 
-.control-group label {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.9rem;
+.upcoming-line {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
-.slider {
+/* 프로그레스 섹션 */
+.progress-section {
+  margin-bottom: 40px;
+}
+
+.progress-bar-container {
   width: 100%;
   height: 6px;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
-  background: #ddd;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+.progress-info {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+/* 컨트롤 패널 */
+.control-panel {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 40px 60px;
+}
+
+.playback-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.control-btn {
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  border: none;
+}
+
+.play-btn:hover {
+  background: linear-gradient(135deg, #ff5252, #ff7979);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.line-progress,
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.line-progress label,
+.speed-control label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 80px;
+}
+
+.modern-slider {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
   outline: none;
   -webkit-appearance: none;
-  appearance: none;
+  cursor: pointer;
 }
 
-.slider::-webkit-slider-thumb {
+.modern-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #007aff;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
-}
-
-.slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #007aff;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
-}
-
-.button-group {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
   transition: all 0.2s ease;
 }
 
-.btn.primary {
-  background: #007aff;
-  color: white;
+.modern-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
 }
 
-.btn.primary:hover {
-  background: #0056cc;
-  transform: translateY(-1px);
-}
-
-.btn.secondary {
-  background: #f1f3f4;
-  color: #333;
-}
-
-.btn.secondary:hover {
-  background: #e8eaed;
-  transform: translateY(-1px);
-}
-
-.text-selector {
-  margin-top: 2rem;
-}
-
-.text-selector h3 {
-  margin-bottom: 1rem;
-  color: #333;
-  font-size: 1.1rem;
-}
-
-.text-buttons {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.btn.text-btn {
-  text-align: left;
-  padding: 0.75rem 1rem;
-  background: white;
-  border: 2px solid #e1e5e9;
-  color: #333;
-  font-size: 0.85rem;
-}
-
-.btn.text-btn:hover {
-  border-color: #007aff;
-  background: #f8f9ff;
-}
-
-.btn.text-btn.active {
-  border-color: #007aff;
-  background: #007aff;
-  color: white;
-}
-
-.examples {
-  margin-top: 3rem;
-}
-
-.examples h2 {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: #1a1a1a;
-}
-
-.example {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.example h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #333;
+.line-progress span,
+.speed-control span {
+  font-size: 14px;
   font-weight: 600;
+  color: #ffffff;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* 가사 목록 */
+.lyrics-list {
+  padding: 0 40px 60px;
+}
+
+.lyrics-list h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lyrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lyric-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.lyric-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 107, 107, 0.3);
+  transform: translateY(-2px);
+}
+
+.lyric-item.active {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 142, 142, 0.1));
+  border-color: #ff6b6b;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(255, 107, 107, 0.2);
+}
+
+.lyric-item.empty {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.lyric-item.empty:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: none;
+}
+
+.line-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.lyric-item.active .line-number {
+  background: #ff6b6b;
+  color: #ffffff;
+}
+
+.line-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* 스타일 쇼케이스 */
+.style-showcase {
+  padding: 0 40px 80px;
+}
+
+.style-showcase h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.style-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.style-example {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.style-example:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.style-example h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* 반응형 디자인 */
-@media (min-width: 768px) {
-  .controls {
-    grid-template-columns: 1fr 1fr;
-    align-items: end;
+@media (max-width: 768px) {
+  .music-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px 30px;
   }
 
-  .button-group {
-    grid-column: 1 / -1;
+  .album-art {
+    margin-right: 0;
+    margin-bottom: 24px;
   }
 
-  .text-buttons {
-    grid-template-columns: repeat(2, 1fr);
+  .song-title {
+    font-size: 36px;
+  }
+
+  .karaoke-main {
+    padding: 0 20px 40px;
+  }
+
+  .control-panel {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 0 20px 40px;
+    text-align: center;
+  }
+
+  .playback-controls {
+    justify-content: center;
+  }
+
+  .lyrics-list {
+    padding: 0 20px 40px;
+  }
+
+  .lyrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .style-showcase {
+    padding: 0 20px 60px;
+  }
+
+  .style-examples {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (min-width: 1024px) {
-  .text-buttons {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* 다크모드 지원 */
+/* 다크모드 최적화 */
 @media (prefers-color-scheme: dark) {
-  .app {
-    background: #1a1a1a;
+  body {
+    background: linear-gradient(135deg, #000000 0%, #0f0f23 50%, #1a1a2e 100%);
+  }
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .song-title {
+    -webkit-text-fill-color: #ffffff;
     color: #ffffff;
   }
 
-  .header h1 {
-    color: #ffffff;
+  .progress-bar {
+    background: #ffffff;
   }
 
-  .demo-section {
-    background: #2a2a2a;
-  }
-
-  .karaoke-container,
-  .example {
-    background: #333333;
-  }
-
-  .btn.secondary {
-    background: #444444;
-    color: #ffffff;
-  }
-
-  .btn.secondary:hover {
-    background: #555555;
-  }
-
-  .btn.text-btn {
-    background: #333333;
-    border-color: #555555;
-    color: #ffffff;
-  }
-
-  .btn.text-btn:hover {
-    background: #f8f9ff;
-    color: #333;
+  .control-btn {
+    background: #ffffff;
+    color: #000000;
   }
 }
