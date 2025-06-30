@@ -1,0 +1,67 @@
+.karaoke-text {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.karaoke-text__base {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.karaoke-text__active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: width;
+}
+
+/* Apple Music 스타일의 부드러운 그라데이션 효과 */
+.karaoke-text__active {
+  background: linear-gradient(
+    90deg,
+    currentColor 0%,
+    currentColor 70%,
+    rgba(255, 255, 255, 0.8) 85%,
+    transparent 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .karaoke-text__active {
+    background: linear-gradient(
+      90deg,
+      currentColor 0%,
+      currentColor 70%,
+      rgba(255, 255, 255, 0.6) 85%,
+      transparent 100%
+    );
+  }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .karaoke-text__active {
+    background: currentColor;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* 모션 감소 설정 지원 */
+@media (prefers-reduced-motion: reduce) {
+  .karaoke-text__active {
+    transition: none !important;
+  }
+} 
